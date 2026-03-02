@@ -1,23 +1,43 @@
+# Base class
 class Employee:
-    def __init__(self, name, emp_id, salary):
+    def __init__(self, name, base_salary):
         self.name = name
-        self.emp_id = emp_id
-        self.salary = salary
+        self.base_salary = base_salary
 
-    def increase_salary(self, amount):
-        if amount > 0:
-            self.salary += amount
-            print(f"Salary increased by ₹{amount}.")
-        else:
-            print("Invalid amount.")
+    def calculate_salary(self):
+        return self.base_salary
 
-    def display_details(self):
-        print("\n--- Employee Details ---")
-        print(f"Name: {self.name}")
-        print(f"Employee ID: {self.emp_id}")
-        print(f"Salary: ₹{self.salary}")
 
-emp1 = Employee("Farhan", "EMP101", 25000)
-emp1.display_details()
-emp1.increase_salary(5000)
-emp1.display_details()
+# Subclass 1: Manager
+class Manager(Employee):
+    def calculate_salary(self):
+        bonus = 0.20 * self.base_salary
+        return self.base_salary + bonus
+
+
+# Subclass 2: Developer
+class Developer(Employee):
+    def calculate_salary(self):
+        bonus = 0.10 * self.base_salary
+        return self.base_salary + bonus
+
+
+# Subclass 3: Intern
+class Intern(Employee):
+    def calculate_salary(self):
+        stipend = 0.05 * self.base_salary
+        return self.base_salary + stipend
+
+
+# Creating objects
+employees = [
+    Manager("Rahul", 50000),
+    Developer("Aman", 40000),
+    Intern("Riya", 20000)
+]
+
+# Display salary details
+for emp in employees:
+    print("Name:", emp.name)
+    print("Total Salary:", emp.calculate_salary())
+    print()
